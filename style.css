@@ -1,0 +1,373 @@
+/* Reset and Global Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+:root {
+  /* Define CSS Variables for easy maintenance */
+  --primary-color: #4a4e69;
+  --secondary-color: #9a8c98;
+  --accent-color: #c9ada7;
+  --background-color: #f2e9e4;
+  --text-color: #22223b;
+  --sidebar-width: 250px;
+  --urgent-color: #e07a5f;
+  --medium-color: #f2cc8f;
+  --low-color: #81b29a;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* --- Left Sidebar Styling --- */
+.left-sidebar-container {
+  width: var(--sidebar-width);
+  flex-shrink: 0; /* Prevent sidebar from shrinking */
+  background-color: var(--primary-color);
+  padding: 20px 15px;
+  color: #fff;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: width 0.3s ease;
+}
+
+.logo-container h1 {
+  font-size: 1.8rem;
+  padding: 10px 0 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 20px;
+}
+
+.nav-link {
+  display: flex;
+  flex-direction: column;
+}
+
+.link-icon-text-container {
+  display: flex;
+  align-items: center;
+  padding: 12px 10px;
+  margin-bottom: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+/* Pseudo-class: Hover effect for navigation links */
+.link-icon-text-container:hover {
+  background-color: var(--secondary-color);
+  transform: translateX(5px);
+}
+
+.icon-link {
+  font-size: 1.2rem;
+  width: 30px;
+  text-align: center;
+}
+
+.link-tex h2 {
+  font-size: 1rem;
+  margin-left: 15px;
+  font-weight: 500;
+}
+
+/* --- Right Sidebar/Main Content Styling --- */
+.right-sidebar-container {
+  flex-grow: 1; /* Take up remaining space */
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.name-image-avatar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--accent-color);
+  margin-bottom: 20px;
+}
+
+.welcome-container h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.welcome-paragraph p {
+  color: var(--secondary-color);
+}
+
+.avatar-profile-container {
+  display: flex;
+  align-items: center;
+}
+
+.avatar-container img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--secondary-color); /* Placeholder color */
+  margin-right: 15px;
+  object-fit: cover;
+}
+
+.profile-container h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.moderator-container p {
+  font-size: 0.9rem;
+  color: var(--accent-color);
+}
+
+/* Ticket Header */
+.ticket-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.ticket-container h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.new-ticket-container h2 {
+  color: var(--primary-color);
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Navigation for Ticket Statuses */
+.notifications-and-filiter-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--accent-color);
+  padding-bottom: 10px;
+}
+
+.links-container {
+  display: flex;
+  gap: 20px;
+}
+
+.notification-text h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--secondary-color);
+  cursor: pointer;
+  padding-bottom: 5px;
+  transition: color 0.2s, border-bottom 0.2s;
+}
+
+/* Pseudo-class: Styling the first link in the group as active */
+.links-container .notification-text:first-child h3 {
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.notification-text:hover h3 {
+  color: var(--text-color);
+}
+
+.search-filter-container button {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+/* Pseudo-class: Hover effect for buttons */
+.search-filter-container button:hover {
+  background-color: var(--secondary-color);
+}
+
+/* Individual Ticket Item */
+.system {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 15px;
+  border-left: 5px solid transparent; /* Base for priority indicator */
+  cursor: pointer;
+  transition: box-shadow 0.2s, border-left 0.2s;
+}
+
+/* Pseudo-class: Hover effect for ticket card */
+.system:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  border-left-color: var(--accent-color);
+}
+
+.system-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.system-content h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.time-frame-containe p {
+  color: var(--secondary-color);
+  font-size: 0.9rem;
+}
+
+.system p {
+  margin-bottom: 15px;
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+.system button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  margin-right: 8px;
+  cursor: default;
+}
+
+/* Styling buttons based on content/priority */
+.system button:first-of-type {
+  text-transform: capitalize; /* Ensure the priority button is capitalized */
+}
+
+/* Styling for Urgent priority */
+.system button:first-of-type[class*="Urgent"],
+.system button:first-of-type[class*="urgent"] {
+  background-color: var(--urgent-color);
+  color: #fff;
+}
+
+/* Styling for Medium priority */
+.system button:first-of-type[class*="Medium"] {
+  background-color: var(--medium-color);
+  color: var(--text-color);
+}
+
+/* Styling for Low priority */
+.system button:first-of-type[class*="Low"] {
+  background-color: var(--low-color);
+  color: #fff;
+}
+
+/* Styling for Ticket ID and Message Count buttons */
+.system button:nth-of-type(n + 2) {
+  background-color: var(--background-color);
+  color: var(--primary-color);
+}
+
+/* Pseudo-class: Styling the last ticket differently (just an example) */
+.system:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Media Query for Responsiveness --- */
+@media (max-width: 768px) {
+  /* Adjust main layout for smaller screens */
+  body {
+    flex-direction: column;
+  }
+
+  /* Collapse Sidebar for mobile */
+  .left-sidebar-container {
+    width: 100%;
+    height: auto;
+    padding: 15px 20px;
+    position: relative; /* Not fixed for simplicity */
+  }
+
+  .dashboard-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo-container h1 {
+    padding: 0;
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  /* Hide Text for mobile navigation */
+  .nav-link {
+    flex-direction: row;
+    gap: 15px;
+    margin-top: 10px;
+  }
+
+  .link-icon-text-container {
+    padding: 5px;
+    margin-bottom: 0;
+    flex-direction: column;
+  }
+
+  .link-tex {
+    display: none; /* Hide link text to save space */
+  }
+
+  .icon-link {
+    width: auto;
+  }
+
+  /* Adjust main content padding */
+  .right-sidebar-container {
+    padding: 20px;
+  }
+
+  /* Stack Header elements */
+  .name-image-avatar-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .avatar-profile-container {
+    margin-top: 15px;
+  }
+
+  /* Stack Filter/Search elements */
+  .notifications-and-filiter-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .links-container {
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+
+  .search-filter-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .search-filter-container button {
+    margin-left: 0;
+    margin-top: 10px;
+    width: 100%;
+  }
+}
