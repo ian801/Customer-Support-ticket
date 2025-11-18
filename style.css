@@ -1,47 +1,55 @@
-/* Reset and Global Styles */
+:root {
+  --primary-color: #3b82f6; /* Blue accent */
+  --secondary-color: #1f2937; /* Dark text/primary color */
+  --background-light: #f3f4f6; /* Light grey background */
+  --background-dark: #ffffff; /* White card background */
+  --urgent-color: #ef4444; /* Red priority */
+  --medium-color: #f59e0b; /* Amber priority */
+  --low-color: #10b981; /* Green priority */
+}
+
+/* === Global Styles & Reset === */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
-}
-
-:root {
-  /* Define CSS Variables for easy maintenance */
-  --primary-color: #4a4e69;
-  --secondary-color: #9a8c98;
-  --accent-color: #c9ada7;
-  --background-color: #f2e9e4;
-  --text-color: #22223b;
-  --sidebar-width: 250px;
-  --urgent-color: #e07a5f;
-  --medium-color: #f2cc8f;
-  --low-color: #81b29a;
+  font-family: "Inter", sans-serif;
+  line-height: 1.4;
 }
 
 body {
   display: flex;
   min-height: 100vh;
-  background-color: var(--background-color);
-  color: var(--text-color);
+  background-color: var(--background-light);
+  color: var(--secondary-color);
+  font-size: 16px;
 }
 
-/* --- Left Sidebar Styling --- */
+/* === Left Sidebar (Navigation) === */
 .left-sidebar-container {
-  width: var(--sidebar-width);
-  flex-shrink: 0; /* Prevent sidebar from shrinking */
-  background-color: var(--primary-color);
-  padding: 20px 15px;
-  color: #fff;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  transition: width 0.3s ease;
+  width: 280px;
+  background-color: var(--background-dark);
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  z-index: 10;
+}
+
+.logo-container {
+  padding: 0 24px;
+  margin-bottom: 20px;
 }
 
 .logo-container h1 {
   font-size: 1.8rem;
-  padding: 10px 0 30px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  margin-bottom: 20px;
+  color: var(--secondary-color);
+  font-weight: 700;
+}
+
+.logo-container h1 span {
+  color: var(--primary-color);
 }
 
 .nav-link {
@@ -52,83 +60,104 @@ body {
 .link-icon-text-container {
   display: flex;
   align-items: center;
-  padding: 12px 10px;
-  margin-bottom: 8px;
-  border-radius: 5px;
+  padding: 14px 24px;
+  gap: 15px;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
+  transition: background-color 0.2s, color 0.2s;
+  border-left: 5px solid transparent;
 }
 
-/* Pseudo-class: Hover effect for navigation links */
+/* Pseudo-class: Active state for the first link (Dashboard) */
+.link-icon-text-container:nth-child(3) {
+  background-color: #eff6ff; /* Light blue background for active link */
+  color: var(--primary-color);
+  font-weight: 600;
+  border-left-color: var(--primary-color);
+}
+
+/* Pseudo-class: Hover effect for all navigation links */
 .link-icon-text-container:hover {
-  background-color: var(--secondary-color);
-  transform: translateX(5px);
+  background-color: #e5e7eb;
+  color: var(--primary-color);
 }
 
-.icon-link {
-  font-size: 1.2rem;
-  width: 30px;
-  text-align: center;
-}
-
-.link-tex h2 {
+.link-icon-text-container h2 {
   font-size: 1rem;
-  margin-left: 15px;
   font-weight: 500;
 }
 
-/* --- Right Sidebar/Main Content Styling --- */
-.right-sidebar-container {
-  flex-grow: 1; /* Take up remaining space */
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
+.icon-link i {
+  font-size: 1.2rem;
+  width: 20px;
+  text-align: center;
 }
 
+/* === Right Sidebar (Main Content Layout) === */
+.right-sidebar-container {
+  flex-grow: 1;
+  padding: 30px;
+  display: grid; /* Default Desktop Layout (Grid) */
+  grid-template-columns: 3fr 1fr; /* Main content | Recent Activity */
+  gap: 30px;
+  overflow-y: auto;
+}
+
+/* Ensure main content elements span the first column */
+.right-sidebar-container > *:not(.right-end-side-recent-activity-container) {
+  grid-column: 1 / 2;
+}
+
+/* --- Header Section --- */
 .name-image-avatar-container {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #e5e7eb;
   padding-bottom: 20px;
-  border-bottom: 1px solid var(--accent-color);
-  margin-bottom: 20px;
 }
 
 .welcome-container h1 {
-  font-size: 2rem;
-  font-weight: 600;
-  color: var(--text-color);
+  font-size: 1.8rem;
+  font-weight: 700;
 }
 
 .welcome-paragraph p {
-  color: var(--secondary-color);
+  color: #6b7280;
+  font-size: 0.9rem;
 }
 
 .avatar-profile-container {
   display: flex;
   align-items: center;
+  gap: 15px;
+  padding: 8px 15px;
+  border-radius: 9999px;
+  background-color: #f9fafb;
+  border: 1px solid #d1d5db;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+
+/* Pseudo-class: Hover on the profile container */
+.avatar-profile-container:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .avatar-container img {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background-color: var(--secondary-color); /* Placeholder color */
-  margin-right: 15px;
   object-fit: cover;
-}
-
-.profile-container h3 {
-  font-size: 1.1rem;
-  font-weight: 600;
+  background-color: var(--primary-color); /* Placeholder color */
 }
 
 .moderator-container p {
-  font-size: 0.9rem;
-  color: var(--accent-color);
+  font-size: 0.8rem;
+  color: var(--primary-color);
 }
 
-/* Ticket Header */
+/* --- Ticket Summary & Action --- */
 .ticket-container {
   display: flex;
   justify-content: space-between;
@@ -136,85 +165,99 @@ body {
   margin-bottom: 20px;
 }
 
-.ticket-container h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-}
-
 .new-ticket-container h2 {
-  color: var(--primary-color);
   font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-color);
   cursor: pointer;
-  text-decoration: underline;
+  padding: 8px 16px;
+  border: 2px solid var(--primary-color);
+  border-radius: 8px;
+  transition: background-color 0.2s, color 0.2s;
 }
 
-/* Navigation for Ticket Statuses */
+/* Pseudo-class: Hover effect for New Ticket button */
+.new-ticket-container h2:hover {
+  background-color: var(--primary-color);
+  color: var(--background-dark);
+}
+
+/* --- Notification & Filter Links --- */
 .notifications-and-filiter-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  border-bottom: 2px solid var(--accent-color);
-  padding-bottom: 10px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 15px;
 }
 
 .links-container {
   display: flex;
-  gap: 20px;
+  gap: 25px;
 }
 
 .notification-text h3 {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 500;
-  color: var(--secondary-color);
+  color: #6b7280;
   cursor: pointer;
   padding-bottom: 5px;
+  border-bottom: 2px solid transparent;
   transition: color 0.2s, border-bottom 0.2s;
 }
 
-/* Pseudo-class: Styling the first link in the group as active */
-.links-container .notification-text:first-child h3 {
+/* Pseudo-class: Hover effect for status links */
+.notification-text h3:hover {
   color: var(--primary-color);
-  border-bottom: 2px solid var(--primary-color);
 }
 
-.notification-text:hover h3 {
-  color: var(--text-color);
+/* Pseudo-class: Active state for the first link ("Unassigned") */
+.links-container .notification-text:first-child h3 {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+  font-weight: 600;
+}
+
+.search-filter-container {
+  display: flex;
+  gap: 10px;
 }
 
 .search-filter-container button {
-  background-color: var(--primary-color);
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  margin-left: 10px;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background-color: var(--background-dark);
+  color: var(--secondary-color);
   cursor: pointer;
   font-size: 0.9rem;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, border-color 0.2s;
 }
 
-/* Pseudo-class: Hover effect for buttons */
+/* Pseudo-class: Hover effect for search/filter buttons */
 .search-filter-container button:hover {
-  background-color: var(--secondary-color);
+  background-color: #f3f4f6;
+  border-color: var(--primary-color);
 }
 
-/* Individual Ticket Item */
+/* === Ticket Items List (.system) === */
 .system {
-  background-color: #fff;
+  background-color: var(--background-dark);
+  border-radius: 12px;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   margin-bottom: 15px;
-  border-left: 5px solid transparent; /* Base for priority indicator */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
   cursor: pointer;
-  transition: box-shadow 0.2s, border-left 0.2s;
+  transition: border-color 0.2s, transform 0.2s;
 }
 
-/* Pseudo-class: Hover effect for ticket card */
+/* Pseudo-class: Hover effect for individual ticket items */
 .system:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  border-left-color: var(--accent-color);
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .system-content {
@@ -224,150 +267,234 @@ body {
   margin-bottom: 10px;
 }
 
-.system-content h3 {
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-.time-frame-containe p {
-  color: var(--secondary-color);
+.system > p {
   font-size: 0.9rem;
-}
-
-.system p {
+  color: #4b5563;
   margin-bottom: 15px;
-  line-height: 1.5;
-  color: var(--text-color);
 }
 
 .system button {
-  padding: 5px 10px;
   border: none;
+  padding: 5px 10px;
   border-radius: 4px;
-  font-weight: 600;
   font-size: 0.8rem;
+  font-weight: 600;
   margin-right: 8px;
   cursor: default;
+  text-transform: capitalize;
 }
 
-/* Styling buttons based on content/priority */
+/* Pseudo-class: Targeting the first button for priority styling */
 .system button:first-of-type {
-  text-transform: capitalize; /* Ensure the priority button is capitalized */
+  color: var(--background-dark);
 }
 
-/* Styling for Urgent priority */
-.system button:first-of-type[class*="Urgent"],
-.system button:first-of-type[class*="urgent"] {
+/* Custom styling for different priority levels (based on content/order for simplicity) */
+.system:nth-child(4) button:first-of-type, /* Cannot access the system (Urgent) */
+.system:nth-child(7) button:first-of-type {
+  /* Cannot access the system (Urgent) */
   background-color: var(--urgent-color);
-  color: #fff;
 }
 
-/* Styling for Medium priority */
-.system button:first-of-type[class*="Medium"] {
+.system:nth-child(5) button:first-of-type {
+  /* Refund not initiated (Medium) */
   background-color: var(--medium-color);
-  color: var(--text-color);
 }
 
-/* Styling for Low priority */
-.system button:first-of-type[class*="Low"] {
+.system:nth-child(6) button:first-of-type {
+  /* Cannot access the system (Low) */
   background-color: var(--low-color);
-  color: #fff;
 }
 
-/* Styling for Ticket ID and Message Count buttons */
-.system button:nth-of-type(n + 2) {
-  background-color: var(--background-color);
+/* Ticket ID button (second button) */
+.system button:nth-of-type(2) {
+  background-color: #e5e7eb;
+  color: var(--secondary-color);
+  cursor: text;
+}
+
+/* Comment count button (last button) */
+.system button:last-of-type {
+  background-color: #eff6ff;
+  color: var(--primary-color);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.system button:last-of-type:hover {
+  background-color: #dbeafe;
+}
+
+/* --- Recent Activity Sidebar --- */
+.right-end-side-recent-activity-container {
+  grid-column: 2 / 3;
+  padding: 20px;
+  background-color: var(--background-dark);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  align-self: flex-start;
+}
+
+.recent-text h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.index-context-container {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.index-context-container .avatar-container img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #9ca3af;
+}
+
+.context-container h4 {
+  font-size: 0.85rem;
+  font-weight: 500;
+  flex-grow: 1;
+  line-height: 1.3;
+}
+
+.time-container p {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.right-end-side-recent-activity-container > button {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: var(--background-dark);
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-weight: 600;
   color: var(--primary-color);
 }
 
-/* Pseudo-class: Styling the last ticket differently (just an example) */
-.system:last-child {
-  margin-bottom: 0;
+.right-end-side-recent-activity-container > button:hover {
+  background-color: #f3f4f6;
 }
 
-/* --- Media Query for Responsiveness --- */
-@media (max-width: 768px) {
-  /* Adjust main layout for smaller screens */
-  body {
-    flex-direction: column;
-  }
+/* ======================================= */
+/* === Media Queries (Responsiveness) === */
+/* ======================================= */
 
-  /* Collapse Sidebar for mobile */
+/* For Tablets and smaller Desktops (1024px max width) */
+@media (max-width: 1024px) {
   .left-sidebar-container {
-    width: 100%;
-    height: auto;
-    padding: 15px 20px;
-    position: relative; /* Not fixed for simplicity */
+    width: 230px;
   }
 
-  .dashboard-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .logo-container h1 {
-    padding: 0;
-    border-bottom: none;
-    margin-bottom: 0;
-  }
-
-  /* Hide Text for mobile navigation */
-  .nav-link {
-    flex-direction: row;
-    gap: 15px;
-    margin-top: 10px;
-  }
-
-  .link-icon-text-container {
-    padding: 5px;
-    margin-bottom: 0;
-    flex-direction: column;
-  }
-
-  .link-tex {
-    display: none; /* Hide link text to save space */
-  }
-
-  .icon-link {
-    width: auto;
-  }
-
-  /* Adjust main content padding */
   .right-sidebar-container {
+    grid-template-columns: 2fr 1fr; /* Adjust column ratio */
+    gap: 20px;
     padding: 20px;
   }
 
-  /* Stack Header elements */
+  .links-container {
+    gap: 15px;
+  }
+}
+
+/* For Mobile Devices (768px max width) */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column; /* Stack the sidebars vertically */
+  }
+
+  /* Collapse the left sidebar into a horizontal header/menu */
+  .left-sidebar-container {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+  }
+
+  .logo-container {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Hide the full text navigation links, making it a "hidden" menu for simplicity */
+  .nav-link {
+    display: none;
+  }
+
+  .right-sidebar-container {
+    /* Use Flexbox for single column layout and ordering on mobile */
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    gap: 20px;
+  }
+
+  /* No need for grid-column spans, as Flexbox in column mode handles full width naturally */
+
   .name-image-avatar-container {
     flex-direction: column;
     align-items: flex-start;
+    gap: 15px;
+    /* Give header first order */
+    order: 1;
+  }
+
+  /* Move Recent Activity up to the second spot in the mobile flow (right after the header) */
+  .right-end-side-recent-activity-container {
+    order: 2;
+  }
+
+  /* Push the ticket lists and controls down */
+  .ticket-container {
+    order: 3;
+  }
+  .notifications-and-filiter-container {
+    order: 4;
+  }
+  /* All ticket item boxes */
+  .system {
+    order: 5;
   }
 
   .avatar-profile-container {
-    margin-top: 15px;
+    width: 100%;
+    justify-content: flex-start;
+    padding: 10px;
   }
 
-  /* Stack Filter/Search elements */
   .notifications-and-filiter-container {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    gap: 15px;
   }
 
   .links-container {
-    margin-bottom: 10px;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Allow status links to wrap */
+    gap: 10px;
+    width: 100%;
+  }
+
+  .notification-text {
+    flex-basis: calc(50% - 5px); /* Two items per row */
   }
 
   .search-filter-container {
-    display: flex;
-    flex-direction: column;
     width: 100%;
+    justify-content: space-between;
   }
 
   .search-filter-container button {
-    margin-left: 0;
-    margin-top: 10px;
-    width: 100%;
+    flex-grow: 1;
   }
 }
